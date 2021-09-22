@@ -32,4 +32,9 @@ export default class Api {
         let r = await api.post(`/usuario/`, { nome: usuario });
         return r.data;
     }
+
+    async login(usuario, senha) {
+        let r = await api.post ('/login', { usuario, senha })
+        return r.data;
+    }
 }

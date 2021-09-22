@@ -1,16 +1,17 @@
+import LoadingBar from 'react-top-loading-bar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import LoadingBar from 'react-top-loading-bar'
  
 import { ContainerConteudo } from './conteudo.styled'
 import { ChatButton, ChatInput, ChatTextArea } from '../../components/outros/inputs'
 
 import { useState, useRef } from 'react';
 
+import Cookies from 'js-cookie'
+import { useHistory } from 'react-router-dom'
+
 import Api from '../../service/api';
 const api = new Api();
-
 
 export default function Conteudo() {
     const [chat, setChat] = useState([]);
@@ -20,6 +21,11 @@ export default function Conteudo() {
 
     const loading = useRef(null);
 
+    const navegation = useHistory();
+
+    const usuarioLogado = Cookies.get('usuario-Logado');
+    if (usuarioLogado == null)
+        navegation.push('/');
 
     const validarResposta = (resp) => {
         //console.log(resp);
